@@ -1,0 +1,1 @@
+This directory contains ES6 Basics which marks the beginning of Software Engineering Backend Specialization at Alx-Holberton School
