@@ -1,0 +1,19 @@
+const sinon = require('sinon');
+const assert = require('assert');
+const Utils = require('./utils');
+const sendPaymentRequestToApi = require('./3-payment');
+
+describe('sendPaymentRequestToApi', () => {
+    it('should call Utils.calculateNumber with the correct arguments and log the total', () => {
+        const calculateNumberSpy = sinon.stub(Utils, 'calculateNumber').returns(10);
+        const consoleLogSpy = sinon.spy(console, 'log');
+
+        sendPaymentRequestToApi(100, 20);
+
+        assert.ok(calculateNumberSpy.calledOnceWithExactly('SUM', 100, 20));
+        assert.strictEqual(calculateNumberSpy('SUM', 100, 20), 10);
+        assert.ok(consoleLogSpy.calledOnceWithExactly('The total is: 10'));
+        calculateNumberSpy.restore();
+        consoleLogSpy.restore();
+    });
+});
