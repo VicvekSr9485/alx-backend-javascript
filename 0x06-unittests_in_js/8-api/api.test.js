@@ -1,25 +1,17 @@
-const app = require('./api');
-const request = require('supertest');
-const { expect } = require('chai');
+const { expect } = require("chai");
+const request = require('request');
 
 describe('test GET /', () => {
-    it('GET / should return 200 status code', (done) => {
-        request(app)
-            .get('/')
-            .expect(200)
-            .end((err, res) => {
-                if (err) return done(err);
-                done();
-            });
+  it('should return correct message in response', (done) => {
+    const options = {
+      url: 'http://localhost:7865',
+      method: 'GET',
+    };
+
+    request(options, function (error, response, body) {
+      expect(response.statusCode).to.equal(200);
+      expect(body).to.equal('Welcome to the payment system');
+      done();
     });
-    
-    it('GET / should return Welcome to the payment system', (done) => {
-        request(app)
-            .get('/')
-            .expect('Welcome to the payment system')
-            .end((err, res) => {
-                if (err) return done(err);
-                done();
-            });
-    });
+  });
 });
