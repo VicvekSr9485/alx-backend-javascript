@@ -42,3 +42,25 @@ describe('test GET cart/:id', () => {
     });
   });
 });
+
+describe('test GET /available_payments', () => {
+  it('should return status 200 and correct body', (done) => {
+    const options = {
+      url: 'http://localhost:7865/available_payments',
+      method: 'GET',
+    };
+
+    const res = {
+      payment_methods: {
+        credit_cards: true,
+        paypal: false,
+      }
+    }
+
+    request(options, function (error, response, body) {
+      expect(response.statusCode).to.equal(200);
+      expect(response.body).to.deep.equal(JSON.stringify(res));
+      done();
+    });
+  });
+});
